@@ -1,0 +1,16 @@
+version: '3.9' # version of the code below
+
+services:
+  # list of services
+  app:
+    # name of service
+    build:
+      context: . # build the docker file inside the current directory
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000" # maps the port of current machine to the port of container
+    volumes:
+      - ./app:/app # this helps to reflect any changes in code to container (wirthout re-building)
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
