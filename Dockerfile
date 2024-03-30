@@ -11,9 +11,8 @@ EXPOSE 8000
 
 ARG DEV=false
 RUN python -m venv /py && \
-    # apk update && \
-    # apk add --update --no-cache libpq-dev gcc && \
     /py/bin/pip install --upgrade pip && \
+    # deps for psycopg2
     apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-build-deps \
         build-base postgresql-dev musl-dev && \
