@@ -9,6 +9,7 @@ from django.contrib.auth.models import (
     PermissionsMixin
 )
 
+
 class UserManager(BaseUserManager):
     """Manager for users"""
 
@@ -18,7 +19,7 @@ class UserManager(BaseUserManager):
             raise ValueError("User must have an email address.")
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
-        user.save(using=self._db) # we use using to make it robust to use 2 databases
+        user.save(using=self._db)  # 'using' makes it robust to use 2 databases
 
         return user
 
@@ -31,6 +32,7 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system"""
     email = models.EmailField(max_length=255, unique=True)
@@ -40,4 +42,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email' # The field that is used for authentication
+    USERNAME_FIELD = 'email'  # The field that is used for authentication
