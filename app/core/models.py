@@ -10,6 +10,7 @@ from django.contrib.auth.models import (
 )
 from django.conf import settings
 
+
 class UserManager(BaseUserManager):
     """Manager for users"""
 
