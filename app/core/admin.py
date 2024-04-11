@@ -52,3 +52,4 @@ class UserAdmin(BaseUserAdmin):
 # we give UserAdmin as one of the arguments of register
 # to tell it to apply the changes that we added in the class
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Recipe)
