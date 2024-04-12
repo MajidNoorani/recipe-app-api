@@ -51,7 +51,7 @@ class ModelTest(TestCase):
         self.assertTrue(user.is_staff)
 
     def test_create_recipe(self):
-        """Test creating a a recipe is successful."""
+        """Test creating a recipe is successful."""
         user = get_user_model().objects.create_user(
             email='test@example.com',
             password='testpass'
