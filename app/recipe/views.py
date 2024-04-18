@@ -11,6 +11,19 @@ from rest_framework import (
 )
 from core.models import Recipe, Tag
 
+"""
+ModelViewSet:
+provides a default implementation of CRUD operations for a Django model
+It combines the functionality of GenericAPIView,
+ListModelMixin, CreateModelMixin, RetrieveModelMixin,
+UpdateModelMixin, and DestroyModelMixin
+
+GenericViewSet is a generic class that does not provide any default actions
+like ModelViewSet. By combining UpdateModelMixin, ListModelMixin,
+and GenericViewSet, you are explicitly defining the behavior for
+listing and updating models.
+"""
+
 
 class RecipeViewSet(viewsets.ModelViewSet):
     """View for manage recipe APIs."""
@@ -34,8 +47,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class TagViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+class TagViewSet(mixins.DestroyModelMixin,
+                 mixins.UpdateModelMixin,
+                 mixins.ListModelMixin,
+                 viewsets.GenericViewSet):
     """Manage tags in the database"""
+    # order of inputs is important
     serializer_class = serializers.TagSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
