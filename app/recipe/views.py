@@ -9,7 +9,7 @@ from rest_framework import (
     viewsets,
     mixins
 )
-from core.models import Recipe, Tag
+from core.models import Recipe, Tag, Ingredient
 
 """
 ModelViewSet:
@@ -62,6 +62,18 @@ class TagViewSet(mixins.DestroyModelMixin,
         """filter queryset to authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-name')
 
-    # def perform_create(self, serializer):
-    #     """Create a new tag"""
-    #     serializer.save(user=self.request.user)
+
+class IngredientViewSet(mixins.DestroyModelMixin,
+                        mixins.UpdateModelMixin,
+                        mixins.ListModelMixin,
+                        viewsets.GenericViewSet):
+    """Manage ingredients in the database"""
+    # order of inputs is important
+    serializer_class = serializers.IngredientSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Ingredient.objects.all()
+
+    def get_queryset(self):
+        """filter queryset to authenticated user."""
+        return self.queryset.filter(user=self.request.user).order_by('-name')
