@@ -2,4 +2,5 @@ django>=5.0.2,<5.1
 djangorestframework>=3.15.0,<3.16
 psycopg2>=2.8.6,<2.9
 drf-spectacular>=0.27.2,<0.28
-pillow>=10.3.0,<10.4
+Pillow>=8.2.0,<8.3
+uwsgi>=2.0.19,<2.1
